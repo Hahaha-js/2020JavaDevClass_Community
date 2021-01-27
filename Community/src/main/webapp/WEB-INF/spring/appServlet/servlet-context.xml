@@ -15,7 +15,7 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/res/**" location="/resources/" />
+	<resources mapping="/res/**" location="/res/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -49,13 +49,12 @@
         <beans:property name="typeAliasesPackage" value="com.koreait.community"/>        
     </beans:bean>
 	<mybatis-spring:scan base-package="com.koreait.community"/>
-	
-	
+		
 	<!-- Tiles 설정  -->
 	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<beans:property name="definitions">
 			<beans:list>
-				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>				
 			</beans:list>
 		</beans:property>
 		<beans:property name="preparerFactoryClass" 
