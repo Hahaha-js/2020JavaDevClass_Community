@@ -7,7 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/res/js/<tiles:getAsString name="privateJs"/>.js"></script>
+<link rel="stylesheet" href="/res/css/common.css">
+<script defer src="/res/js/<tiles:getAsString name="categoryJs"/>.js"></script>
 </head>
 <body>
 	<div id="container">

@@ -7,4 +7,5 @@ import com.koreait.community.model.UserEntity;
 @Mapper
 public interface UserMapper {
 	int insUser(UserEntity p);
+	UserEntity selUser(UserEntity p);
 }

@@ -9,7 +9,6 @@
 	
 	<definition name="*/*" extends="tiles_temp">	
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
-        <put-attribute name="privateJs" value="{1}" />
-    </definition>
-       	
+        <put-attribute name="categoryJs" value="{1}" />
+    </definition>       	
 </tiles-definitions>

@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.errMsg {
+	color: red;
+	font-weight: bold;
+}

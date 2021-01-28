@@ -4,8 +4,11 @@
 	<div><a href="/user/login">Go to Login</a></div>
 	
 	<form id="frm" action="/user/join" method="post" onsubmit="return chkFrm();">
-		<div><input type="text" name="userId" placeholder="ID"><button>중복체크</button></div>
-		<div id="idChkMsg"></div>
+		<div>
+			<input type="text" name="userId" placeholder="ID">
+			<input type="button" value="중복체크" id="chkIdBtn">
+		</div>
+		<div id="idChkMsg" class="errMsg"></div>
 		<div><input type="password" name="userPw" placeholder="PASSWORD"></div>
 		<div><input type="password" name="userPwRe" placeholder="COMFIRM PASSWORD"></div>
 		<div><input type="text" name="nm" placeholder="NAME"></div>
