@@ -6,18 +6,64 @@ function chkItem(ele, nm) {
 	}
 }
 
-function chkFrm() {
-	var frm = document.querySelector('#frm');
+var joinBtnElem = document.querySelector('#joinBtn')
+if(joinBtnElem) {
+	var frmElem = document.querySelector('#frm')
+	var userIdElem = frmElem.userId
+	var userPwElem = frmElem.userPw
+	var userPwReElem = frmElem.userPwRe
+	var nmElem = frmElem.nm
+	var genderElem = frmElem.gender
 	
-	if(chkItem(frm.userId, 'Id') 
-		|| chkItem(frm.userPw, 'Pw') 
-		|| chkItem(frm.nm, '이름')) {
-		return false;
-	} else if(frm.userPw.value !== frm.userPwRe.value) {
-		alert('비밀번호를 확인해 주세요.');
-		frm.userPw.focus();
-		return false;
+	function eleChk () { //이상있으면 true, 이상없으면 false
+		if(chkItem(userIdElem, 'Id') 
+			|| chkItem(userPwElem, 'Pw') 
+			|| chkItem(nmElem, '이름')) {
+			return true
+		} else if(userPwElem.value !== userPwReElem.value) {
+			alert('비밀번호를 확인해 주세요.');
+			userPwElem.focus()
+			return true
+		}
+		return false
 	}
+	
+	function ajax () {
+		var param = {			
+			userId: userIdElem.value,
+			userPw: userPwElem.value,
+			nm: nmElem.value,
+			gender: genderElem.value
+		}
+		
+		fetch('/user/join', {
+			method: 'post',
+			headers: {
+            	'Content-Type': 'application/json',
+        	},
+			body: JSON.stringify(param)
+		}).then(function(res) {
+			return res.json()
+		}).then(function(myJson) {
+			proc(myJson)			
+		})
+	}
+	
+	function proc (myJson) {
+		if(myJson.result === 0) { //회원가입 실패 
+			alert('회원가입에 실패하였습니다.')
+			return
+		}
+		//회원가입 성공!
+		alert('회원가입을 축하합니다')
+		location.href = '/user/login'
+	}
+	
+	joinBtnElem.addEventListener('click', function() {		
+		if(eleChk()) { return }
+		ajax()		
+	})
+	
 }
 
 var loginBtnElem = document.querySelector('#loginBtn')
@@ -34,13 +80,13 @@ if(loginBtnElem) {
 			alert('비밀번호를 입력해 주세요')
 			return
 		}
-		var param = {
+		var param = {			
 			userId: userIdElem.value,
 			userPw: userPwElem.value
 		}
 		
 		fetch('/user/login', {
-			method: 'POST',
+			method: 'post',
 			headers: {
             	'Content-Type': 'application/json',
         	},
@@ -48,8 +94,22 @@ if(loginBtnElem) {
 		}).then(function(res) {
 			return res.json()
 		}).then(function(myJson) {
-			console.log(myJson)
+			proc(myJson)
 		})
+	}
+	
+	function proc (myJson) {
+		switch(myJson.result) {
+			case 1:
+				location.href = '/board/home'
+			return
+			case 2:
+				alert('아이디를 확인해 주세요!!!')
+			return
+			case 3:
+				alert('비밀번호를 확인해 주세요!!!')
+			return
+		}
 	}
 	loginBtnElem.addEventListener('click', ajax)
 }

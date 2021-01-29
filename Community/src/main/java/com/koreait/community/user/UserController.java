@@ -38,13 +38,23 @@ public class UserController {
 		return returnValue;
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession hs) {
+		hs.invalidate();
+		return "redirect:/user/login";
+	}
+	
 	@GetMapping("/join")
 	public void join() {}
 	
+	@ResponseBody
 	@PostMapping("/join")
-	public String join(UserEntity p) {
-		int result = service.join(p);
-		return "redirect:/user/login";
+	public Map<String, Object> join(@RequestBody UserEntity p) {
+		
+		Map<String, Object> returnValue = new HashMap<>();
+		returnValue.put("result", service.join(p)); 
+		
+		return returnValue;
 	}
 	
 	@ResponseBody
