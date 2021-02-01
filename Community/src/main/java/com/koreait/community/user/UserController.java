@@ -24,7 +24,7 @@ public class UserController {
 	private UserService service;
 	
 	@GetMapping("/login")
-	public void login(Model model) {}
+	public void login() {}
 	
 	@ResponseBody
 	@PostMapping("/login")

@@ -2,7 +2,7 @@ package com.koreait.community.model;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("UserEntity")
+
 public class UserEntity {	
 	private int userPk;
 	private String userId;
