@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <tiles:importAttribute name="menuList"/>
-<header>	
+<header>
 	<c:if test="${sessionScope.loginUser !=  null}">
 		${sessionScope.loginUser.nm}님 환영합니다
 	</c:if>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.koreait.community.Const;
 import com.koreait.community.SecurityUtils;
 import com.koreait.community.model.BoardDTO;
 import com.koreait.community.model.BoardEntity;
@@ -27,7 +28,8 @@ public class BoardController {
 	public void home() {	}
 	
 	@GetMapping("/list")
-	public void list(BoardDTO p, Model model) {
+	public void list(BoardDTO p, Model model) {		
+		model.addAttribute(Const.KEY_LIST, service.selBoardList(p));
 	}
 	
 	@GetMapping("/write")
