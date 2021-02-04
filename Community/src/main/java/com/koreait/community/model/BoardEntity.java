@@ -1,7 +1,5 @@
 package com.koreait.community.model;
 
-import org.apache.ibatis.type.Alias;
-
 public class BoardEntity {
 	private int boardPk;
 	private int category;
