@@ -53,7 +53,7 @@
 			</choose>
 		</set>
 		WHERE boardPk = #{boardPk}
-		<if test="userPk != 0">
+		<if test="userPk > 0">
 			AND userPk = #{userPk}
 		</if>
 	</update>

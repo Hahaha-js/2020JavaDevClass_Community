@@ -29,7 +29,11 @@ public class BoardService {
 		return mapper.selBoardList(p);
 	}
 	
-	public BoardDomain selBoard(BoardDTO p, HttpSession hs) {
+	public BoardDomain selBoard(BoardDTO p) {
+		return mapper.selBoard(p);
+	}
+	
+	public BoardDomain selBoardWithHits(BoardDTO p, HttpSession hs) {
 		//로그인 한 사람만 조회수 올릴꺼임!!
 		if(sUtils.getLoginUser(hs) != null) {
 			BoardEntity p2 = new BoardEntity();
@@ -37,12 +41,15 @@ public class BoardService {
 			p2.setHits(1);			
 			mapper.updBoard(p2);
 		}
-		
-		return mapper.selBoard(p);
+		return selBoard(p);
+	}
+	
+	public int delBoard(BoardEntity p) {
+		p.setIsDel(1);
+		return updBoard(p);
 	}
 	
 	public int updBoard(BoardEntity p) {
-		p.setIsDel(1);
 		return mapper.updBoard(p);
 	}
 }

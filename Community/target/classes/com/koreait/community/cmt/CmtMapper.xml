@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.community.cmt.CmtMapper">
+	<select id="selCmtList" resultType="CmtEntity">
+		SELECT * FROM t_board_cmt
+		WHERE boardPk = #{boardPk}
+		ORDER BY seq DESC
+	</select>
+	
+	<insert id="insCmt">
+		INSERT INTO t_board_cmt
+		(boardPk, seq, writerPk, ctnt)
+		SELECT #{boardPk}, IFNULL(MAX(seq), 0) + 1, #{writerPk}, #{ctnt}
+		FROM t_board_cmt
+		WHERE boardPk = #{boardPk}
+	</insert>
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
+

@@ -40,7 +40,7 @@ public class BoardController {
 	
 	@GetMapping("/detail")
 	public void detail(BoardDTO p, Model model, HttpSession hs) {
-		model.addAttribute(Const.KEY_DATA, service.selBoard(p, hs));
+		model.addAttribute(Const.KEY_DATA, service.selBoardWithHits(p, hs));
 	}
 	
 	@GetMapping("/write")
@@ -62,9 +62,23 @@ public class BoardController {
 		
 		System.out.println("boardPk : " + p.getBoardPk());
 		Map<String, Object> rVal = new HashMap<>();
-		rVal.put(Const.KEY_DATA, service.updBoard(p));
+		rVal.put(Const.KEY_DATA, service.delBoard(p));
 		return rVal;
 	}
+	
+	@GetMapping("/edit")
+	public String eidt(BoardDTO p, Model model) {
+		model.addAttribute(Const.KEY_DATA, service.selBoard(p));
+		return "board/writeEdit";
+	}
+	
+	@PostMapping("/edit")
+	public String eidt(BoardEntity p, HttpSession hs) {
+		p.setUserPk(sUtils.getLoginUserPk(hs));
+		int result = service.updBoard(p);
+		return "redirect:/board/detail?boardPk=" + p.getBoardPk();
+	}
+	
 	
 }
 
