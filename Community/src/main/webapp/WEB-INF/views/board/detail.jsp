@@ -21,6 +21,18 @@
 	<div>작성자 : <c:out value="${requestScope.data.writerNm}"/></div>
 	<div><c:out value="${requestScope.data.ctnt}"/></div>
 </div>
+
+<div>
+	<h4>댓글쓰기</h4>
+	<form id="cmtFrm">
+		<input type="hidden" name="boardPk" value="${requestScope.data.boardPk}">
+		
+	</form>
+</div>
+
+<div id="cmtList">
+
+</div>
 <script src="/res/js/board/detail.js"></script>
 
 

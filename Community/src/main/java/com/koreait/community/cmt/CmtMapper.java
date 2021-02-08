@@ -8,6 +8,8 @@ import com.koreait.community.model.CmtEntity;
 
 @Mapper
 public interface CmtMapper {
-	List<CmtEntity> selCmtList(CmtEntity p);
 	int insCmt(CmtEntity p);
+	List<CmtEntity> selCmtList(CmtEntity p);
+	int updCmt(CmtEntity p);
+	int delCmt(CmtEntity p);
 }

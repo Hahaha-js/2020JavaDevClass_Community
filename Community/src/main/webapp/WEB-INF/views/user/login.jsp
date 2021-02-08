@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <div>
 	<form id="frm">
-		<div><input type="text" name="userId" placeholder="ID"></div>
-		<div><input type="password" name="userPw" placeholder="PASSWORD"></div>
+		<div><input type="text" name="userId" placeholder="ID" value="mic"></div>
+		<div><input type="password" name="userPw" placeholder="PASSWORD" value="1212"></div>
 		<div><input type="button" value="Login" id="loginBtn"></div>
 	</form>	
 	<div id="errMsg">	
