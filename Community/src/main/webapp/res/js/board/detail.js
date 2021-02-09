@@ -159,6 +159,11 @@ selCmtList()
 
 var cmtFrmElem = document.querySelector('#cmtFrm')
 if(cmtFrmElem) {
+	cmtFrmElem.onsubmit = function(e) {
+		e.preventDefault()
+	}
+	
+	
 	var txtElem = cmtFrmElem.ctnt
 	var btnElem = cmtFrmElem.btn
 	btnElem.addEventListener('click', ajax)
@@ -183,7 +188,11 @@ if(cmtFrmElem) {
 			body: JSON.stringify(param)
 		}).then(res => {
 			res.json().then(myJson => {
-				console.log(myJson)
+				if(myJson === 1) {
+					selCmtList()
+				} else {
+					alert('댓글 등록에 실패하였습니다.')
+				}
 			})
 		})
 		
