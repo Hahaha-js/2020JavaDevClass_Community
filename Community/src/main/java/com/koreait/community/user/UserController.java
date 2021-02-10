@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.koreait.community.Const;
+import com.koreait.community.SecurityUtils;
 import com.koreait.community.model.UserEntity;
 
 @Controller
@@ -22,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private SecurityUtils sUtils;
 	
 	@GetMapping("/login")
 	public void login() {}
@@ -64,6 +70,19 @@ public class UserController {
 		Map<String, Object> returnValue = new HashMap<>();
 		returnValue.put("result", service.chkId(p)); //아이디가 있으면 1, 없으면 0 리턴
 		return returnValue;
+	}
+	
+	@GetMapping("/profile")
+	public void profile(Model model, UserEntity p, HttpSession hs) {		
+		p.setUserPk(sUtils.getLoginUserPk(hs));
+		model.addAttribute(Const.KEY_DATA, service.selUser(p));
+	}
+	
+	@ResponseBody
+	@PostMapping("/profile")
+	public int profile(MultipartFile profileImg, HttpSession hs) {
+		System.out.println("fileName : " + profileImg.getOriginalFilename());
+		return service.uploadProfile(profileImg, hs);
 	}
 }
 
