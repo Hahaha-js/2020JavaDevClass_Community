@@ -32,7 +32,7 @@
 			<if test=" salt != null and salt !='' ">
 				salt = #{salt},
 			</if>
-			<if test=" profileImg != null">
+			<if test=" profileImg != null ">
 				profileImg = #{profileImg}
 			</if>
 		</set>

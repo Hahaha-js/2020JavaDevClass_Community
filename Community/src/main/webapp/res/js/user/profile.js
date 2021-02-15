@@ -1,7 +1,7 @@
 var profileImgElem = document.querySelector('#profileImg')
 
 function profileUpload() {
-	if(profileImgElem.value === '') {
+	if(profileImgElem.files.length === 0) {
 		alert('이미지를 선택해 주세요')
 		return
 	}
