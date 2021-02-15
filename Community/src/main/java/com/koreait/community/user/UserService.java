@@ -82,9 +82,8 @@ public class UserService {
 		if(userPk == 0 || mf == null) { //로그인이 안 되어 있는 경우, 파일이 없는 경우
 			return 0;
 		}
-		String f1 = "/res/img";
-		String f2 = "/user/" + userPk;
-		String profileImg = fUtils.transferTo(mf, f1, f2);
+		String folder = "/res/img/user/" + userPk;		
+		String profileImg = fUtils.transferTo(mf, folder);
 		if(profileImg == null) { //파일 생성 실패
 			return 0;
 		}
@@ -95,14 +94,14 @@ public class UserService {
 		//기존이미지가 존재했다면 이미지 삭제!
 		UserEntity userInfo = mapper.selUser(p);
 		if(userInfo.getProfileImg() != null) {
-			String basePath = fUtils.getBasePath(f1); 
+			String basePath = fUtils.getBasePath(folder); 
 			File file = new File(basePath, userInfo.getProfileImg());
 			if(file.exists()) {
 				file.delete();
 			}
 		}
 				
-		p.setProfileImg(f2 + "/" + profileImg);
+		p.setProfileImg(profileImg);
 		return mapper.updUser(p);
 	}
 }
