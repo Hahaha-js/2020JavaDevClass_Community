@@ -1,4 +1,10 @@
 @charset "UTF-8";
+
+#listContent, #pagingContent {
+	display: flex;
+	justify-content: center;	
+}
+
 .basic-table {
 	border-collapse: collapse;
 	text-align: left;
@@ -14,6 +20,15 @@
 
 .basic-table tr.record {
 	cursor: pointer;
+}
+
+#pagingContent > .pointer:not(:first-child) {
+	margin-left: 8px;
+}
+
+#pagingContent > .pointer.selected {
+	color: red;
+	font-weight: bold;
 }
 
 

@@ -10,6 +10,10 @@ nav {
   padding: 16px;
 }
 
+.pointer {
+	cursor: pointer;
+}
+
 .menuItems {
     list-style: none;
     display: flex;
@@ -61,6 +65,9 @@ nav {
 	cursor: pointer;
 }
 
+#container > section {
+	padding: 20px;
+}
 
 
 

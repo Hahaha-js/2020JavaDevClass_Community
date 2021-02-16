@@ -9,40 +9,21 @@
 			<button>글쓰기</button>
 		</a>
 	</c:if>
+	글갯수 : 
+	<select id="selRowCnt">
+		<option value="5">5개</option>
+		<option value="10">10개</option>
+		<option value="15">15개</option>
+	</select>
 </div>
-<div>
-	<c:choose>
-		<c:when test="${fn:length(requestScope.list) == 0}">
-			<div>글이 없습니다.</div>
-		</c:when>
-		<c:otherwise>
-			<table class="basic-table">
-				<tr>
-					<td>번호</td>
-					<td>제목</td>
-					<td>조회수</td>
-					<td>작성일</td>
-					<td>작성자</td>
-				</tr>
-				<c:forEach items="${requestScope.list}" var="item">
-					<tr class="record" onclick="goToDetail(${item.boardPk})">				
-						<td>${item.seq}</td>
-						<td><c:out value="${item.title}"/></td>
-						<td>${item.hits}</td>
-						<td>${item.regDt}</td>
-						<td><c:out value="${item.writerNm}"/></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</c:otherwise>
-	</c:choose>
-	
+<div id="listContent" data-category="${param.category}">		
 </div>
-<div>
-	페이징
+<div id="pagingContent">	
 </div>
-<script src="/res/js/board/list.js"></script>
 
+
+
+<script src="/res/js/board/list.js"></script>
 
 
 

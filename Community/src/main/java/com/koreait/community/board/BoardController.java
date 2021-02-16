@@ -1,6 +1,7 @@
 package com.koreait.community.board;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.koreait.community.Const;
 import com.koreait.community.SecurityUtils;
 import com.koreait.community.model.BoardDTO;
+import com.koreait.community.model.BoardDomain;
 import com.koreait.community.model.BoardEntity;
 
 @Controller
@@ -34,8 +35,18 @@ public class BoardController {
 	public void home() {	}
 	
 	@GetMapping("/list")
-	public void list(BoardDTO p, Model model) {		
-		model.addAttribute(Const.KEY_LIST, service.selBoardList(p));
+	public void list() {}
+	
+	@ResponseBody
+	@GetMapping("/listData")
+	public List<BoardDomain> listData(BoardDTO p) {
+		return service.selBoardList(p);
+	}
+	
+	@ResponseBody
+	@GetMapping("/getMaxPageNum")
+	public int selMaxPageNum(BoardDTO p) {
+		return service.selMaxPageNum(p);
 	}
 	
 	@GetMapping("/detail")

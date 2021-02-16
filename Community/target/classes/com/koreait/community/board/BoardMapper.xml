@@ -9,6 +9,13 @@
 		WHERE category = #{category}
 	</insert>
 	
+	<select id="selMaxPageNum" resultType="_int">
+		SELECT CEIL(COUNT(boardPk) / #{rowCnt}) 
+		FROM t_board
+		WHERE category = #{category}
+		AND isDel = 0
+	</select>
+	
 	<select id="selBoardList" resultType="BoardDomain">
 		SELECT 
 			A.boardPk, A.seq, A.title, A.hits, A.regDt
@@ -19,6 +26,7 @@
 		WHERE A.category = #{category}
 		AND A.isDel = 0
 		ORDER BY A.boardPk DESC
+		LIMIT #{sIdx}, #{rowCnt}
 	</select>
 	
 	<select id="selBoard" resultType="BoardDomain">
