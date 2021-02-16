@@ -2,6 +2,7 @@ function goToDetail (boardPk) {
 	location.href = `/board/detail?boardPk=${boardPk}`
 }
 
+var gPage = 1
 var listContentElem = document.querySelector('#listContent')
 var category = listContentElem.dataset.category
 var selRowCntElem = document.querySelector('#selRowCnt') //글갯수
@@ -99,7 +100,11 @@ function pageProc (myJson) {
 		const span = document.createElement('span')
 		span.innerText = i
 		span.classList.add('pointer') //span마다 pointer 클래스 주세요
-				
+		
+		if(gPage === i) {
+			span.classList.add('selected')
+		}
+		
 		//span에 click이벤트를 건다. 클릭하면 getBoardList 함수 호출
 		span.addEventListener('click', function() {
 			getBoardList(i)
@@ -122,17 +127,15 @@ function pageHighlight(ele) {
 }
 
 
-var page = 1
+
 var pageInfoTxt = sessionStorage.getItem('pageInfo')
 if(pageInfoTxt) {
 	var pageInfo = JSON.parse(pageInfoTxt)
-	page = pageInfo.page
+	gPage = pageInfo.page
 	selRowCntElem.value = pageInfo.rowCnt
-	var pageEle = pagingContentElem.children[page - 1]
-	pageHighlight(pageEle)
 }
 
-getBoardList(page)
+getBoardList(gPage)
 getMaxPageNum()
 
 
