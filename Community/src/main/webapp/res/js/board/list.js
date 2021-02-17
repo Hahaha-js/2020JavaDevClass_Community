@@ -6,6 +6,9 @@ var gPage = 1
 var listContentElem = document.querySelector('#listContent')
 var category = listContentElem.dataset.category
 var selRowCntElem = document.querySelector('#selRowCnt') //글갯수
+var selSearchTypeElem = document.querySelector('#selSearchType') //검색타입
+var txtSearchTextElem = document.querySelector('#txtSearchText') //검색어
+var gSearchText = ''
 selRowCntElem.addEventListener('change', function() {	
 	getBoardList(1)
 	getMaxPageNum()
@@ -16,14 +19,21 @@ function getBoardList (page) {
 	if(!page) {
 		page = 1
 	}
+	gPage = page
+	
 	var rowCnt = selRowCntElem.value
+	var searchType = selSearchTypeElem.value
+	var searchText = txtSearchTextElem.value
+
 	var info = {
+		page,	
 		rowCnt,
-		page,		
+		searchType,
+		searchText,		
 	}
 	sessionStorage.setItem('pageInfo', JSON.stringify(info))
 	
-	fetch(`/board/listData?category=${category}&page=${page}&rowCnt=${rowCnt}`)
+	fetch(`/board/listData?category=${category}&page=${page}&rowCnt=${rowCnt}&searchType=${searchType}&searchText=${searchText}`)
 	.then(res => res.json())
 	.then(myJson => {		
 		boardProc(myJson)
@@ -81,11 +91,12 @@ function boardProc(myJson) {
 }
 
 
-
-
 function getMaxPageNum() {
 	var rowCnt = selRowCntElem.value
-	fetch(`/board/getMaxPageNum?category=${category}&rowCnt=${rowCnt}`)
+	var searchType = selSearchTypeElem.value
+	var searchText = txtSearchTextElem.value
+	
+	fetch(`/board/getMaxPageNum?category=${category}&rowCnt=${rowCnt}&searchType=${searchType}&searchText=${searchText}`)
 	.then(res => res.json())
 	.then(myJson => {
 		pageProc(myJson)
@@ -107,10 +118,14 @@ function pageProc (myJson) {
 		
 		//span에 click이벤트를 건다. 클릭하면 getBoardList 함수 호출
 		span.addEventListener('click', function() {
+			if(gSearchText) {
+				txtSearchTextElem.value = gSearchText
+			} else {				
+				txtSearchTextElem.value = ''
+			}
 			getBoardList(i)
 			pageHighlight(this)
 		})
-		
 		pagingContentElem.append(span)
 	}
 }
@@ -127,27 +142,24 @@ function pageHighlight(ele) {
 }
 
 
-
 var pageInfoTxt = sessionStorage.getItem('pageInfo')
 if(pageInfoTxt) {
-	var pageInfo = JSON.parse(pageInfoTxt)
-	gPage = pageInfo.page
+	var pageInfo = JSON.parse(pageInfoTxt)	
 	selRowCntElem.value = pageInfo.rowCnt
+	selSearchTypeElem.value = pageInfo.searchType
+	txtSearchTextElem.value = pageInfo.searchText
+		
+	search(pageInfo.page)	
+} else {
+	search()	
 }
 
-getBoardList(gPage)
-getMaxPageNum()
-
-
-
-
-
-
-
-
-
-
-
+function search(page = 1) {
+	gSearchText = txtSearchTextElem.value
+	gPage = page
+	getBoardList(page)
+	getMaxPageNum()	
+}
 
 
 

@@ -6,8 +6,15 @@ public class BoardDTO {
 	private int page;
 	private int sIdx;
 	private int rowCnt;
+	private int searchType;
 	private String searchText;
-		
+
+	public int getSearchType() {
+		return searchType;
+	}
+	public void setSearchType(int searchType) {
+		this.searchType = searchType;
+	}
 	public int getBoardPk() {
 		return boardPk;
 	}

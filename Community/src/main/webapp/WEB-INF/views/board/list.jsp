@@ -15,6 +15,15 @@
 		<option value="10">10개</option>
 		<option value="15">15개</option>
 	</select>
+	
+	<select id="selSearchType">
+		<option value="1">제목</option>
+		<option value="2">내용</option>
+		<option value="3">제목+내용</option>
+		<option value="4">작성자</option>
+	</select>
+	<input type="search" id="txtSearchText">
+	<input type="button" value="검색" onclick="search()">
 </div>
 <div id="listContent" data-category="${param.category}">		
 </div>
